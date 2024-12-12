@@ -1,0 +1,121 @@
+.edit-task {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #2C3E50;
+  font-family: 'Arvo', sans-serif;
+  color: #ECF0F1;
+}
+
+.edit-task .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #34495E;
+}
+
+.edit-task .logo {
+  height: 40px;
+}
+
+.edit-task .navigation-tabs {
+  display: flex;
+  gap: 20px;
+}
+
+.edit-task .tab {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-task .tab.active {
+  background-color: #4A90E2;
+  color: #FFFFFF;
+  border-radius: 5px;
+}
+
+.edit-task .tab:hover {
+  background-color: #4A90E2;
+}
+
+.edit-task .main-content {
+  flex-grow: 1;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-task form {
+  background-color: #34495E;
+  padding: 30px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.edit-task .form-field {
+  margin-bottom: 20px;
+}
+
+.edit-task .form-field label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #ECF0F1;
+}
+
+.edit-task .form-field input,
+.edit-task .form-field textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #7F8C8D;
+  border-radius: 5px;
+  background-color: #2C3E50;
+  color: #ECF0F1;
+}
+
+.edit-task .form-field input:focus,
+.edit-task .form-field textarea:focus {
+  outline: none;
+  border-color: #50E3C2;
+}
+
+.edit-task .save-button {
+  padding: 10px 20px;
+  background-color: #F5A623;
+  border: none;
+  border-radius: 5px;
+  color: #FFFFFF;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-task .save-button:hover {
+  background-color: #D48822;
+}
+
+.edit-task .footer {
+  background-color: #34495E;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-task .footer-link {
+  color: #9013FE;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.edit-task .footer-link:hover {
+  color: #7C0CBB;
+}
+
+.edit-task .copyright {
+  color: #4A90E2;
+}
