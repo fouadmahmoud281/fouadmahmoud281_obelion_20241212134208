@@ -12,11 +12,11 @@
     "license": "ISC",
     "dependencies": {
         "sequelize": "latest",
-        "react": "latest",
         "express": "latest",
         "cors": "latest",
         "mysql": "latest",
-        "mysql2": "latest"
+        "mysql2": "latest",
+        "react": "latest"
     },
     "devDependencies": {
         "sequelize": "6.6.5",

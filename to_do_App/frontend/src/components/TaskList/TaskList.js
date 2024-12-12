@@ -1,70 +1,41 @@
 import React, { useState } from 'react';
 import './TaskList.css';
 
-function TaskList({ tasks, onUpdateTask }) {
+function TaskList({ tasks, onDelete }) {
   const [selectedTask, setSelectedTask] = useState(null);
-  const [taskDetails, setTaskDetails] = useState('');
 
-  const handleTaskSelect = (task) => {
-    setSelectedTask(task);
-    setTaskDetails(task.details);
-  };
-
-  const handleTaskChange = (event) => {
-    setTaskDetails(event.target.value);
-  };
-
-  const handleSaveChanges = () => {
-    if (selectedTask) {
-      onUpdateTask({ ...selectedTask, details: taskDetails });
-      setSelectedTask(null);
-      setTaskDetails('');
-    }
+  const handleDelete = (taskId) => {
+    onDelete(taskId);
+    alert('Task successfully deleted');
   };
 
   return (
-    <div className="task-list-container">
-      <header className="header">
-        <img src="company-logo-url" alt="Company Logo" className="company-logo" />
+    <div className="task-list">
+      <header className="task-list-header">
+        <img src="[COMPANY_LOGO_URL]" alt="Company Logo" className="logo" />
         <nav className="navigation-tabs">
-          <div className="tab active-tab">Tasks</div>
-          <div className="tab">Settings</div>
+          <a href="#home">Home</a>
+          <a href="#tasks">Tasks</a>
+          <a href="#profile">Profile</a>
         </nav>
       </header>
-      <main className="main-content">
-        <div className="task-list">
-          {tasks.map((task, index) => (
-            <div
-              key={index}
-              className={`task-item ${selectedTask === task ? 'selected-task' : ''}`}
-              onClick={() => handleTaskSelect(task)}
+      <ul className="tasks">
+        {tasks.map(task => (
+          <li key={task.id} className="task-item">
+            <span className="task-name">{task.name}</span>
+            <button
+              className="delete-button"
+              style={{ backgroundColor: '#F5A623' }}
+              onClick={() => handleDelete(task.id)}
             >
-              {task.name}
-            </div>
-          ))}
-        </div>
-        {selectedTask && (
-          <div className="task-editor">
-            <textarea
-              value={taskDetails}
-              onChange={handleTaskChange}
-              className="task-textarea"
-              placeholder="Edit task details"
-            />
-            <button onClick={handleSaveChanges} className="save-button">
-              Save Changes
+              Delete
             </button>
-          </div>
-        )}
-      </main>
-      <footer className="footer">
-        <div className="additional-links">
-          <a href="/privacy" className="link">Privacy Policy</a>
-          <a href="/terms" className="link">Terms of Service</a>
-        </div>
-        <div className="copyright">
-          © 2023 Company Name
-        </div>
+          </li>
+        ))}
+      </ul>
+      <footer className="task-list-footer">
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
       </footer>
     </div>
   );
