@@ -1,54 +1,70 @@
 import React, { useState } from 'react';
 import './TaskList.css';
 
-function TaskList() {
-  const [taskName, setTaskName] = useState('');
+function TaskList({ tasks, onUpdateTask }) {
+  const [selectedTask, setSelectedTask] = useState(null);
   const [taskDetails, setTaskDetails] = useState('');
-  const [tasks, setTasks] = useState([]);
 
-  const handleSaveTask = () => {
-    if (taskName.trim() && taskDetails.trim()) {
-      const newTask = { name: taskName, details: taskDetails };
-      setTasks([...tasks, newTask]);
-      setTaskName('');
+  const handleTaskSelect = (task) => {
+    setSelectedTask(task);
+    setTaskDetails(task.details);
+  };
+
+  const handleTaskChange = (event) => {
+    setTaskDetails(event.target.value);
+  };
+
+  const handleSaveChanges = () => {
+    if (selectedTask) {
+      onUpdateTask({ ...selectedTask, details: taskDetails });
+      setSelectedTask(null);
       setTaskDetails('');
-      alert('Task Created Successfully!');
     }
   };
 
   return (
     <div className="task-list-container">
       <header className="header">
-        <img src="YOUR_LOGO_URL" alt="Logo" className="logo" />
+        <img src="company-logo-url" alt="Company Logo" className="company-logo" />
+        <nav className="navigation-tabs">
+          <div className="tab active-tab">Tasks</div>
+          <div className="tab">Settings</div>
+        </nav>
       </header>
-      <div className="navigation">
-        <ul>
-          <li className="active-tab">Tasks</li>
-          <li>Another Tab</li>
-        </ul>
-      </div>
-      <main className="task-input-area">
-        <input
-          type="text"
-          placeholder="Task Name"
-          value={taskName}
-          onChange={(e) => setTaskName(e.target.value)}
-          className="task-input"
-        />
-        <textarea
-          placeholder="Task Details"
-          value={taskDetails}
-          onChange={(e) => setTaskDetails(e.target.value)}
-          className="task-details-input"
-        ></textarea>
-        <button onClick={handleSaveTask} className="save-task-button">
-          Save Task
-        </button>
+      <main className="main-content">
+        <div className="task-list">
+          {tasks.map((task, index) => (
+            <div
+              key={index}
+              className={`task-item ${selectedTask === task ? 'selected-task' : ''}`}
+              onClick={() => handleTaskSelect(task)}
+            >
+              {task.name}
+            </div>
+          ))}
+        </div>
+        {selectedTask && (
+          <div className="task-editor">
+            <textarea
+              value={taskDetails}
+              onChange={handleTaskChange}
+              className="task-textarea"
+              placeholder="Edit task details"
+            />
+            <button onClick={handleSaveChanges} className="save-button">
+              Save Changes
+            </button>
+          </div>
+        )}
       </main>
       <footer className="footer">
-        <a href="#help" className="footer-link">Help</a>
-        <a href="#settings" className="footer-link">Settings</a>
-        <a href="#logout" className="footer-link">Logout</a>
+        <div className="additional-links">
+          <a href="/privacy" className="link">Privacy Policy</a>
+          <a href="/terms" className="link">Terms of Service</a>
+        </div>
+        <div className="copyright">
+          © 2023 Company Name
+        </div>
       </footer>
     </div>
   );
